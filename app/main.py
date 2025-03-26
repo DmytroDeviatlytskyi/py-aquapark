@@ -16,9 +16,9 @@ class IntegerRange:
         if not isinstance(value, int):
             raise TypeError("Value should be integer")
         elif not (self.min_amount <= value <= self.max_amount):
-            raise ValueError(f"Value should be less "
+            raise ValueError(f"Value should be greater or equal to "
                              f"than {self.min_amount}, "
-                             f"and greater than {self.max_amount}")
+                             f"and less than or equal to {self.max_amount}")
         setattr(instance, self.protected_name, value)
 
 
@@ -31,6 +31,10 @@ class Visitor:
 
 
 class SlideLimitationValidator(ABC):
+    age = IntegerRange(0, 120)
+    weight = IntegerRange(0, 300)
+    height = IntegerRange(0, 250)
+
     def __init__(self, age: int, weight: int, height: int) -> None:
         self.age = age
         self.weight = weight
